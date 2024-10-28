@@ -1,8 +1,10 @@
 import pandas as pd
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from pymongo import ASCENDING
 import os
 from dotenv import load_dotenv
+from helpers import *
 
 load_dotenv()
 
@@ -19,7 +21,7 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 # Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
+    print('Pinged your deployment. You successfully connected to MongoDB!')
 except Exception as e:
     print(e)
 
@@ -34,3 +36,17 @@ patient_info_collection = healthcare_db['patient_info']
 
 # Insert the data into the MongoDB collection
 patient_info_collection.insert_many(data_dict_format)
+
+# Make PatientID unique
+patient_info_collection.create_index(
+    [('PatientID', ASCENDING)],
+     unique=True
+)
+
+# Ensure unique identifiers are actually unique like PatientID
+verify_index(patient_info_collection)
+        
+convert_str_to_date(patient_info_collection, 'VisitDate')
+
+# Nothing returned means the field is not that data type; thus, it needs conversion
+verify_data_type(patient_info_collection, 'VisitDate', 'date')

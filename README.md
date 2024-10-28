@@ -42,3 +42,11 @@ WHERE age > 40 AND hospital = "Stony Brook Hospital";
 
 ## 3. Modify and Explore the Data in MongoDB Atlas and Redis Cloud
 ### MongoDB Atlas (Cloud):
+1. [mongodb_connect.py](https://github.com/dnce17/HHA504_assignment_nosql_dbs/blob/main/mongodb_connect.py) 
+    * contains code to connect to the database and insert data into a collection (table)
+        * NOTE: CSV file was converted to JSON-like format before being pushed into the collection
+2. Queries follow a different convention than SQL
+    * e.g. { Age: { $gt: 40 } }
+        * This condition was used to get documents with age > 40
+        * [Aggregation Operators](https://www.mongodb.com/docs/manual/reference/operator/aggregation/) - more operators are written here
+![Running query](img/mongodb/run_query.png)
