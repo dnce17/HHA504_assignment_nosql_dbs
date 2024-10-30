@@ -56,7 +56,7 @@ WHERE age > 40 AND hospital = "Stony Brook Hospital";
 ```mongodb
 { Age: { $gt: 40 } }
 ```
-* The above condition was used to get documents with age > 40 in the browser. In python, that query was used with mongo client's .find() method
+* The above condition was used to get documents with age > 40 in the browser. In python, that condition was used with mongo client's .find() method to achieve the same result.
 ```python
 patients_over_40 = patient_info_collection.find({"Age": {"$gt": 40}})
 
