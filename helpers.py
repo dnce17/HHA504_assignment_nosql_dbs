@@ -1,5 +1,6 @@
 from datetime import datetime
 
+# MongoDB helper functions
 def verify_index(collection):
     # Verify the indexes on the collection
     indexes = collection.index_information()

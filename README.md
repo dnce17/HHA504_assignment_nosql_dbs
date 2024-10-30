@@ -5,21 +5,21 @@
 1. On BigQuery's default page, click "+Add" and then "Local file"
 ![Navigation to upload dataset file](img/gcp/bigquery/upload_file_link.png)
 2. The following were done:
-    * Select file: (browse and upload your csv file)
+    * Select file: (browse and upload CSV file)
     * File format: CSV
-    * Table: (a name related to what the CSV file about)
-    * Auto detect: checked
+    * Table: (a name related to what the CSV file is about)
+    * Auto detect schema: checked
 3. Click the "Dataset" box and click "Create New Dataset." These configurations were applied:
     * Dataset ID: (enter some name)
     * Location type: Region
     * Region: (closest region to you)
-4. Create the dataset, then create the table
 ![Table creation process with dataset](img/gcp/bigquery/create_table.png)
+4. Create the dataset, then create the table
 
 ### MongoDB Atlas (Cloud):
 1. Click your cluster
 ![Page showing list of cluster](img/mongodb/click_cluster.png)
-2. Click the "Collection," then "+ Create Database"
+2. Click "Collection," then "+ Create Database"
 ![Specific cluster's page](img/mongodb/create_db.png)
     * Name the database and collection (aka table), then create it
 ![Create database box](img/mongodb/create_db_config.png)
@@ -58,16 +58,12 @@ WHERE age > 40 AND hospital = "Stony Brook Hospital";
         * [Aggregation Operators](https://www.mongodb.com/docs/manual/reference/operator/aggregation/) - more operators are written here
 ![Running query](img/mongodb/run_query.png)
 
+### Redis Cloud:
+1. [redis_connect.py](https://github.com/dnce17/HHA504_assignment_nosql_dbs/blob/main/redis_connect.py) 
+
 ## 4. Describe Your Experience
-### Question: 
-For each of the three services (BigQuery, MongoDB Atlas, Redis Cloud), document your experience creating and working with the healthcare dataset:
-* Describe the setup process and any configuration steps.
-    * Already described in the steps above in the other headers
-* Share your reflections on the interface and usability of each platform.
-    * NOTE: For reflection, talk about what was similar, dissimilar, pain points, did you need to do anything to the data to make it play nicely, etc. That sort of stuff.
+ BigQuery, MongoDB Atlas, and Redis Cloud all differ in their ability to run queries and upload and view data. BigQuery allows both of those functions directly on the browser. MongoDB Atlas appears to only allow running queries on the browser, but uploading datasets seem to require an outside tool like MongoDB Compass. Redis Cloud appears to not allow either functions on the browser and must be done with tools like Redis Insight or an editor also. 
 
- BigQuery, MongoDB Atlas, and Redis Cloud all differ in their ability to run queries and upload and view data. BigQuery allows both of those functions directly on the browser. MongoDB Atlas allows only running queries on the browser it seems, but uploading dataset seem to require MongoDB Compass or an editor. Redis Cloud appears to not allow either functions on the browser and must be done with tools like Redis Insight or an editor. 
+The interface of all three services' website was fairly user-friendly. The labels were clear and didn't require clicking through a lot of links to get to what was desired like connection details, running queries, or uploading files. In terms of usability, Redis' website feels the least usable as even basic functions like viewing data have to be done through outside tools. 
 
-The interface of all three services' website was fairly user-friendly. The labels were clear and didn't require clicking through a lot of links to get what was desired like connection details, running queries, or uploading files. In terms of usability, Redis' website feels the least usable as even basic functions like viewing data have to be done through outside tools. 
-
-MongoDB Atlas seems to require correcting the data type for certain data like dates. When pushing the patient info dataset to MongoDB, the date columns were treated as strings and required conversion. Having certain fields like PatientID act as unique identifiers needed to be set manually too, which is also the case for Redis Cloud too. For both services, connection details are provided, which is required to push data to their respective databases.
+MongoDB Atlas seems to require correcting the data type for certain data like dates; when pushing the patient info dataset to MongoDB, the date columns were treated as strings and required conversion. Having certain fields like PatientID act as unique identifiers needed to be set manually too, which was also the case for Redis Cloud. For both services, connection details are provided, which is required to push data to their respective databases with an outside tool.
