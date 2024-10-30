@@ -53,13 +53,35 @@ WHERE age > 40 AND hospital = "Stony Brook Hospital";
     * contains code to connect to the database and insert data into a collection (table)
         * NOTE: CSV file was converted to JSON-like format before being pushed into the collection
 2. Queries follow a different convention than SQL
-    * e.g. { Age: { $gt: 40 } }
-        * This condition was used to get documents with age > 40
-        * [Aggregation Operators](https://www.mongodb.com/docs/manual/reference/operator/aggregation/) - more operators are written here
+```mongodb
+{ Age: { $gt: 40 } }
+```
+* The above condition was used to get documents with age > 40 in the browser. In python, that query was used with mongo client's .find() method
+```python
+patients_over_40 = patient_info_collection.find({"Age": {"$gt": 40}})
+
+for patient in patients_over_40:
+    print(patient)
+```
+
+* [Aggregation Operators](https://www.mongodb.com/docs/manual/reference/operator/aggregation/) - more operators are written here
+
 ![Running query](img/mongodb/run_query.png)
 
 ### Redis Cloud:
 1. [redis_connect.py](https://github.com/dnce17/HHA504_assignment_nosql_dbs/blob/main/redis_connect.py) 
+    * The following code was used to get the data for PatientID = 1 and update its "TreatmentPlan" key value to "Occupational Therapy."
+```python
+# Get PatientID = 1 data
+patient_1_data = r.get(1)  # returns a string data type, not dict
+patient_1_dict = json.loads(patient_1_data)  # convert to dict
+
+# Update the treatment plan
+patient_1_dict['TreatmentPlan'] = "Occupational Therapy"
+
+# Save it back to Redis
+r.set(1, json.dumps(patient_1_dict))  # Convert dict back to JSON string
+```
 
 ## 4. Describe Your Experience
  BigQuery, MongoDB Atlas, and Redis Cloud all differ in their ability to run queries and upload and view data. BigQuery allows both of those functions directly on the browser. MongoDB Atlas appears to only allow running queries on the browser, but uploading datasets seem to require an outside tool like MongoDB Compass. Redis Cloud appears to not allow either functions on the browser and must be done with tools like Redis Insight or an editor also. 

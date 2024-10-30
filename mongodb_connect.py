@@ -50,3 +50,9 @@ convert_str_to_date(patient_info_collection, 'VisitDate')
 
 # Nothing returned means the field is not that data type; thus, it needs conversion
 verify_data_type(patient_info_collection, 'VisitDate', 'date')
+
+# Find patients age > 40
+patients_over_40 = patient_info_collection.find({"Age": {"$gt": 40}})
+
+for patient in patients_over_40:
+    print(patient)
